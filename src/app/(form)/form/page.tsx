@@ -1,71 +1,108 @@
+'use client'
+import { SetStateAction, useEffect, useState } from 'react';
+import { Roboto } from "next/font/google";
 import Head from "next/head";
+import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+function LoadingScreen() {
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500"></div>
+    </div>
+  );
+}
 
 export default function Page() {
-    return (
-      <div className="flex flex-col items-center bg-gray-100 min-h-screen">
-      <Head>
-        <title>Company Data Form</title>
-        <link
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          rel="stylesheet"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-      <header className="w-full bg-white py-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <img
-              alt="Picture of the author"
-              className="h-10"
-              height="50"
-              src="/kotralogo.svg"
-              width="200"
+  const [loading, setLoading] = useState(true); // State for loading
+  const [formStep, setFormStep] = useState(0); // State for form steps
+  const [selectedButton, setSelectedButton] = useState(0); // State for selected button
+
+  useEffect(() => {
+    // Simulate a loading delay
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000); // Adjust the time to your preference
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleNext = () => {
+    setFormStep((prevStep) => {
+      const newStep = prevStep + 1;
+      setSelectedButton(newStep);
+      return newStep;
+    });
+  };
+
+  const handlePrev = () => {
+    setFormStep((prevStep) => {
+      const newStep = Math.max(prevStep - 1, 0);
+      setSelectedButton(newStep);
+      return newStep;
+    });
+  };
+
+  const handleButtonClick = (index: SetStateAction<number>) => {
+    setSelectedButton(index);
+    setFormStep(index); // Navigate to the corresponding form step
+  };
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  return (
+    <div className="flex flex-col items-center bg-white-100 min-h-screen">
+      <main className="container mx-auto mt-8">
+        <div className="bg-grey p-8 rounded-lg shadow-lg">
+          <div className="flex justify-between mb-10">
+            {['Company Data', 'Business Product', 'Date Meeting', 'Upload File'].map((text, index) => (
+              <button 
+                key={index}
+                className={`flex-1 py-5 px-5 rounded-2xl text-white shadow-md ml-4 ${selectedButton === index ? 'bg-[#0B3A89]' : 'bg-[#E1E1E1]'}`}
+                onClick={() => handleButtonClick(index)}
+              >
+                <img
+                  alt={`${text} Icon`}
+                  className="mb-2"
+                  height="40"
+                  src={`/images/button/${text.toLowerCase().replace('', '')}.svg`}
+                  width="200"
+                />
+                <div className="text-center" style={{ fontSize: 16 }}>
+                  {text}
+                </div>
+              </button>
+            ))}
+          </div> 
+          <form>
+            {formStep === 0 && (
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+                {/* Form Fields */}
+                <div>
+            <label className="block text-gray-700">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              className="w-full mt-1 p-2 border rounded-md"
+              required
+              type="email"
             />
           </div>
-        </div>
-      </header>
-      <main className="container mx-auto mt-8">
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <div className="flex justify-between mb-6">
-            <button className="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md">
-              <i className="fas fa-building mr-2"></i> Company Data
-            </button>
-            <button className="flex-1 py-2 px-4 bg-gray-200 text-gray-600 rounded-lg shadow-md ml-4">
-              <i className="fas fa-box mr-2"></i> Business Products
-            </button>
-            <button className="flex-1 py-2 px-4 bg-gray-200 text-gray-600 rounded-lg shadow-md ml-4">
-              <i className="fas fa-calendar-alt mr-2"></i> Date Meeting
-            </button>
-            <button className="flex-1 py-2 px-4 bg-gray-200 text-gray-600 rounded-lg shadow-md ml-4">
-              <i className="fas fa-upload mr-2"></i> Upload File
-            </button>
+          <div>
+            <label className="block text-gray-700">
+              Mobile Phone <span className="text-red-500">*</span>
+            </label>
+            <input
+              className="w-full mt-1 p-2 border rounded-md"
+              required
+              type="tel"
+            />
           </div>
-          <form>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-gray-700">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  className="w-full mt-1 p-2 border rounded-md"
-                  required
-                  type="email"
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700">
-                  Mobile Phone <span className="text-red-500">*</span>
-                </label>
-                <input
-                  className="w-full mt-1 p-2 border rounded-md"
-                  required
-                  type="tel"
-                />
-              </div>
-              <div>
+          <div>
                 <label className="block text-gray-700">
                   Company Name <span className="text-red-500">*</span>
                 </label>
@@ -125,58 +162,96 @@ export default function Page() {
                   type="number"
                 />
               </div>
-            </div>
-            <p className="text-sm text-gray-500 mt-4">
-              * Mandatory, Wajib diisi
-            </p>
+              <p className="text-sm text-gray-500 mt-4">
+              <span className="text-red-500">*</span> Mandatory, Wajib diisi
+              </p>
+              </div>
+            )}
+
+            {formStep === 1 && (
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+                {/* Next set of form fields */}
+                <div>
+                  <label className="block text-gray-700">
+                    Company Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    className="w-full mt-1 p-2 border rounded-md"
+                    required
+                    type="text"
+                  />
+                </div>
+                {/* Other fields */}
+                <p className="text-sm text-gray-500 mt-4">
+                  <span className="text-red-500">*</span> Mandatory, Wajib diisi
+                </p>
+              </div>
+            )}
+
+            {formStep === 2 && (
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+                {/* Next set of form fields */}
+                <div>
+                  <label className="block text-gray-700">
+                    Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    className="w-full mt-1 p-2 border rounded-md"
+                    required
+                    type="text"
+                  />
+                </div>
+                {/* Other fields */}
+                <p className="text-sm text-gray-500 mt-4">
+                  <span className="text-red-500">*</span> Mandatory, Wajib diisi
+                </p>
+              </div>
+            )}
+
+            {formStep === 3 && (
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+                {/* Next set of form fields */}
+                <div>
+                  <label className="block text-gray-700">
+                    Upload <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    className="w-full mt-1 p-2 border rounded-md"
+                    required
+                    type="text"
+                  />
+                </div>
+                {/* Other fields */}
+                <p className="text-sm text-gray-500 mt-4">
+                  <span className="text-red-500">*</span> Mandatory, Wajib diisi
+                </p>
+              </div>
+            )}
             <div className="flex justify-between mt-6">
-              <button
-                className="flex items-center py-2 px-4 bg-gray-200 text-gray-600 rounded-lg shadow-md"
-                type="button"
+              <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={handlePrev}
+                style={{
+                  borderRadius: 10,
+                  backgroundColor: "#ffffff",
+                  padding: "12px 36px",
+                  fontSize: "15px"
+                }}
               >
-                <i className="fas fa-arrow-left mr-2"></i> Prev
-              </button>
-              <button
-                className="flex items-center py-2 px-4 bg-blue-600 text-white rounded-lg shadow-md"
-                type="submit"
+                Prev
+              </Button>
+              <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={handleNext}
+                style={{
+                  borderRadius: 10,
+                  backgroundColor: "#0B3A89",
+                  padding: "12px 36px",
+                  fontSize: "15px"
+                }}
               >
-                Next <i className="fas fa-arrow-right ml-2"></i>
-              </button>
+                Next
+              </Button>
             </div>
           </form>
         </div>
       </main>
-      <footer className="w-full bg-blue-900 text-white py-8 mt-8">
-        <div className="container mx-auto flex justify-between">
-          <div>
-            <h2 className="text-lg font-bold">Contact Us</h2>
-            <p className="mt-2">KOTRA JAKARTA</p>
-            <p>Wisma GKBI Suite 801, Jln. Jendral Sudirman Kav. 28, RT.14/RW.1</p>
-            <p>Bend. Hilir, Tanah Abang, Kota Jakarta Pusat,</p>
-            <p>Daerah Khusus Ibukota Jakarta 10210</p>
-            <p className="mt-2">General Inquiries:</p>
-            <div className="flex mt-2">
-              <button className="py-1 px-3 bg-white text-blue-900 rounded-lg shadow-md mr-2">
-                KOTRA HQ
-              </button>
-              <button className="py-1 px-3 bg-white text-blue-900 rounded-lg shadow-md">
-                BuyKorea
-              </button>
-            </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-bold">Follow Us</h2>
-            <div className="flex mt-2 space-x-4">
-              <i className="fab fa-youtube text-2xl"></i>
-              <i className="fab fa-facebook text-2xl"></i>
-              <i className="fab fa-twitter text-2xl"></i>
-              <i className="fab fa-tiktok text-2xl"></i>
-              <i className="fab fa-instagram text-2xl"></i>
-            </div>
-          </div>
-        </div>
-      </footer>
-      </div>
-      
-    )
-  }
+    </div>
+  );
+}
