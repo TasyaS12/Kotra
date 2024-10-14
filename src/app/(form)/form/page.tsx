@@ -65,7 +65,12 @@ return newStep;
             {['Company Data', 'Business Product', 'Date Meeting', 'Upload File'].map((text, index) => (
               <button
                 key={index}
-                className={`flex-1 py-5 px-5 rounded-2xl text-white shadow-md ml-4 ${selectedButton === index ? 'bg-[#0B3A89]' : 'bg-[#E1E1E1]'}`}
+                className={`flex-1 py-5 px-5 rounded-2xl text-white ml-4 ${selectedButton === index ? 'bg-[#0B3A89]' : 'bg-[#E1E1E1]'}`}
+                style={{
+                  fontFamily: 'YourCustomFont, inter',
+                  fontSize: "13px",
+                  boxShadow: '-1px 1px 1px rgba(0, 0, 0, 0.1)', // Tambahkan bayangan kustom
+                }}
                 onClick={() => handleButtonClick(index)}
               >
                 <img
@@ -83,16 +88,27 @@ return newStep;
           </div>
           <form>
             {formStep === 0 && (
-              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-2xl bg-[#fffff]" 
+              style={{
+                fontFamily: 'YourCustomFont, inter',
+                fontWeight: 'thin !important',
+                fontSize: "13px",
+                boxShadow: '-5px 10px 10px rgba(128, 128, 128, 0.3)', // Tambahkan bayangan kustom
+              }}
+              >
                 {/* Form Fields */}
+              
                 <div>
             <label className="block text-gray-700">
               Email <span className="text-red-500">*</span>
             </label>
             <input
-              className="w-full mt-1 p-2 border rounded-md"
+              className="w-full mt-4 p-4 border rounded-md"
               required
               type="email"
+              style={{ borderRadius: "8px",
+                borderColor: "#E8E8E8",
+              }}
             />
           </div>
           <div>
@@ -100,9 +116,12 @@ return newStep;
               Mobile Phone <span className="text-red-500">*</span>
             </label>
             <input
-              className="w-full mt-1 p-2 border rounded-md"
+              className="w-full mt-4 p-4 border rounded-md"
               required
               type="tel"
+              style={{ borderRadius: "8px",
+                borderColor: "#E8E8E8",
+              }}
             />
           </div>
           <div>
@@ -110,9 +129,12 @@ return newStep;
                   Company Name <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full mt-1 p-2 border rounded-md"
+                  className="w-full mt-4 p-4 border rounded-md"
                   required
                   type="text"
+                  style={{ borderRadius: "8px",
+                    borderColor: "#E8E8E8",
+                  }}
                 />
               </div>
               <div>
@@ -120,9 +142,12 @@ return newStep;
                   Company Email <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full mt-1 p-2 border rounded-md"
+                  className="w-full mt-4 p-4 border rounded-md"
                   required
                   type="email"
+                  style={{ borderRadius: "8px",
+                    borderColor: "#E8E8E8",
+                  }}
                 />
               </div>
               <div>
@@ -130,9 +155,12 @@ return newStep;
                   Person In Charge <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full mt-1 p-2 border rounded-md"
+                  className="w-full mt-4 p-4 border rounded-md"
                   required
                   type="text"
+                  style={{ borderRadius: "8px",
+                    borderColor: "#E8E8E8",
+                  }}
                 />
               </div>
               <div>
@@ -140,9 +168,12 @@ return newStep;
                   Website <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full mt-1 p-2 border rounded-md"
+                  className="w-full mt-4 p-4 border rounded-md"
                   required
                   type="url"
+                  style={{ borderRadius: "8px",
+                    borderColor: "#E8E8E8",
+                  }}
                 />
               </div>
               <div>
@@ -150,9 +181,12 @@ return newStep;
                   Position <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full mt-1 p-2 border rounded-md"
+                  className="w-full mt-4 p-4 border rounded-md"
                   required
                   type="text"
+                  style={{ borderRadius: "8px",
+                    borderColor: "#E8E8E8",
+                  }}
                 />
               </div>
               <div>
@@ -160,9 +194,12 @@ return newStep;
                   Year Of Established <span className="text-red-500">*</span>
                 </label>
                 <input
-                  className="w-full mt-1 p-2 border rounded-md"
+                  className="w-full mt-4 p-4 border rounded-md"
                   required
                   type="number"
+                  style={{ borderRadius: "8px",
+                    borderColor: "#E8E8E8",
+                  }}
                 />
               </div>
               <p className="text-sm text-gray-500 mt-4">
@@ -172,16 +209,26 @@ return newStep;
             )}
 
             {formStep === 1 && (
-              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-2xl bg-[#fffff]" 
+              style={{
+                fontFamily: 'YourCustomFont, inter',
+                fontWeight: 'thin',
+                fontSize: "13px",
+                boxShadow: '-5px 10px 10px rgba(128, 128, 128, 0.3)', // Tambahkan bayangan kustom
+              }}
+              >
                 {/* Next set of form fields */}
                 <div>
                   <label className="block text-gray-700">
                     Company Name <span className="text-red-500">*</span>
                   </label>
                   <input
-                    className="w-full mt-1 p-2 border rounded-md"
+                    className="w-full mt-4 p-4 border rounded-md"
                     required
                     type="text"
+                    style={{ borderRadius: "8px",
+                      borderColor: "#E8E8E8",
+                    }}
                   />
                 </div>
                 {/* Other fields */}
@@ -192,16 +239,26 @@ return newStep;
             )}
 
             {formStep === 2 && (
-              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-2xl bg-[#fffff]" 
+              style={{
+                fontFamily: 'YourCustomFont, inter',
+                fontWeight: 'thin',
+                fontSize: "13px",
+                boxShadow: '-5px 10px 10px rgba(128, 128, 128, 0.3)', // Tambahkan bayangan kustom
+              }}
+              >
                 {/* Next set of form fields */}
                 <div>
                   <label className="block text-gray-700">
                     Name <span className="text-red-500">*</span>
                   </label>
                   <input
-                    className="w-full mt-1 p-2 border rounded-md"
+                    className="w-full mt-4 p-4 border rounded-md"
                     required
                     type="text"
+                    style={{ borderRadius: "8px",
+                      borderColor: "#E8E8E8",
+                    }}
                   />
                 </div>
                 {/* Other fields */}
@@ -212,16 +269,26 @@ return newStep;
             )}
 
             {formStep === 3 && (
-              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">
+              <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-2xl bg-[#fffff]" 
+              style={{
+                fontFamily: 'YourCustomFont, inter',
+                fontWeight: 'thin',
+                fontSize: "13px",
+                boxShadow: '-5px 10px 10px rgba(128, 128, 128, 0.3)', // Tambahkan bayangan kustom
+              }}
+              >
                 {/* Next set of form fields */}
                 <div>
                   <label className="block text-gray-700">
                     Upload <span className="text-red-500">*</span>
                   </label>
                   <input
-                    className="w-full mt-1 p-2 border rounded-md"
+                    className="w-full mt-4 p-4 border"
                     required
                     type="text"
+                    style={{ borderRadius: "8px",
+                      borderColor: "#E8E8E8",
+                    }}
                   />
                 </div>
                 {/* Other fields */}
@@ -231,22 +298,37 @@ return newStep;
               </div>
             )}
             <div className="flex justify-between mt-6">
-              <Button variant="outlined" startIcon={<ArrowBackIcon />} onClick={handlePrev}
-                style={{
-                  borderRadius: 10,
+            <Button variant="contained" endIcon={<ArrowBackIcon />} onClick={handlePrev}
+                sx={{
+                  fontFamily: 'YourCustomFont, inter',
+                  fontWeight: 'bold',
+                  borderRadius: 2,
                   backgroundColor: "#ffffff",
                   padding: "12px 36px",
-                  fontSize: "15px"
+                  fontSize: "15px",
+                  color: "#0B3A89",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Menambahkan bayangan
+                  '&:hover': {
+                    backgroundColor: "#B3B3B3", // Mengubah warna tombol saat di-hover
+                    boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.3)", // Bayangan saat di-hover
+                  },
                 }}
               >
                 Prev
               </Button>
               <Button variant="contained" endIcon={<ArrowForwardIcon />} onClick={handleNext}
-                style={{
-                  borderRadius: 10,
+                sx={{
+                  fontFamily: 'YourCustomFont, inter',
+                  fontWeight: 'bold',
+                  borderRadius: 2,
                   backgroundColor: "#0B3A89",
                   padding: "12px 36px",
-                  fontSize: "15px"
+                  fontSize: "15px",
+                  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)", // Menambahkan bayangan
+                  '&:hover': {
+                    backgroundColor: "#0A3378", // Mengubah warna tombol saat di-hover
+                    boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.3)", // Bayangan saat di-hover
+                  },
                 }}
               >
                 Next
