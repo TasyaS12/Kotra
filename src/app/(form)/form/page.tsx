@@ -72,7 +72,7 @@ return newStep;
                   alt={`${text} Icon`}
                   className="mb-2"
                   height="40"
-                  src={`/images/button/${text.toLowerCase().replace('', '')}.svg`}
+                  src={`/images/button/${text.toLowerCase().replace(' ', '-')}.svg`}
                   width="200"
                 />
                 <div className="text-center" style={{ fontSize: 16 }}>

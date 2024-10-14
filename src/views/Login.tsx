@@ -34,6 +34,7 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+import { loginWithEmailPassword } from '@/utils/login'
 
 const MaskImg = styled('img')({
   blockSize: 'auto',
@@ -66,6 +67,22 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
 
   const handleClickShowPassword = () => setIsPasswordShown(show => !show)
 
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    const email = event.target.elements.email.value
+    const password = event.target.elements.password.value
+
+    console.log(email,password)
+
+    try {
+      await loginWithEmailPassword(email, password)
+      router.push('/home')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className='flex bs-full justify-center'>
       <div
@@ -97,14 +114,12 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
           <form
             noValidate
             autoComplete='off'
-            onSubmit={e => {
-              e.preventDefault()
-              router.push('/')
-            }}
+            onSubmit={handleLogin}
             className='flex flex-col gap-5'
           >
-            <CustomTextField autoFocus fullWidth label='Email or Username' placeholder='Enter your email or username' />
+            <CustomTextField name='email' autoFocus fullWidth label='Email or Username' placeholder='Enter your email or username' />
             <CustomTextField
+              name='password'
               fullWidth
               label='Password'
               placeholder='············'

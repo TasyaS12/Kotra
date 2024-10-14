@@ -1,8 +1,5 @@
 // Next Imports
-import { cookies } from 'next/headers'
-
-// Third-party Imports
-import 'server-only'
+import Cookies from 'js-cookie';
 
 // Type Imports
 import type { Settings } from '@core/contexts/settingsContext'
@@ -12,40 +9,23 @@ import type { SystemMode } from '@core/types'
 import themeConfig from '@configs/themeConfig'
 
 export const getSettingsFromCookie = (): Settings => {
-  const cookieStore = cookies()
+  const cookieName = themeConfig.settingsCookieName;
+  const cookieValue = Cookies.get(cookieName);
 
-  const cookieName = themeConfig.settingsCookieName
-
-  return JSON.parse(cookieStore.get(cookieName)?.value || '{}')
-}
+  return JSON.parse(cookieValue || '{}');
+};
 
 export const getMode = () => {
   const settingsCookie = getSettingsFromCookie()
 
   // Get mode from cookie or fallback to theme config
-  const _mode = settingsCookie.mode || themeConfig.mode
-
-  return _mode
+  return settingsCookie.mode || themeConfig.mode
 }
 
 export const getSystemMode = (): SystemMode => {
-  const cookieStore = cookies()
   const mode = getMode()
 
-  const colorPrefCookie = (cookieStore.get('colorPref')?.value || 'light') as SystemMode
+  const colorPrefCookie = Cookies.get('colorPref') as SystemMode || 'light'
 
-  return (mode === 'system' ? colorPrefCookie : mode) || 'light'
-}
-
-export const getServerMode = () => {
-  const mode = getMode()
-  const systemMode = getSystemMode()
-
-  return mode === 'system' ? systemMode : mode
-}
-
-export const getSkin = () => {
-  const settingsCookie = getSettingsFromCookie()
-
-  return settingsCookie.skin || 'default'
+  return (mode === 'system' ? colorPrefCookie : (mode === 'dark' ? 'dark' : 'light'))
 }

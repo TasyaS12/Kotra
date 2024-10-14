@@ -1,20 +1,29 @@
-// Next Imports
-import type { Metadata } from 'next'
+'use client'
 
 // Component Imports
+import { useRouter } from 'next/navigation'
+
 import Login from '@views/Login'
 
 // Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
+import { getMode } from '@core/utils/serverHelpers'
+import { isLogin } from '@/utils/login'
 
-export const metadata: Metadata = {
-  title: 'Login',
-  description: 'Login to your account'
-}
 
 const LoginPage = () => {
+
   // Vars
-  const mode = getServerMode()
+  let mode = getMode()
+
+  if (mode === 'system') {
+    mode = 'light'
+  }
+
+  const router = useRouter()
+
+  if(isLogin()) {
+    router.push('/home')
+  }
 
   return <Login mode={mode} />
 }

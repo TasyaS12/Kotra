@@ -1,3 +1,5 @@
+'use client'
+
 // MUI Imports
 import Grid from '@mui/material/Grid'
 
@@ -9,7 +11,7 @@ import DateBarChart from '@views/home/analytics/DateBarChart'
 import BasicDataTables from '@views/home/analytics/BasicDataTables'
 
 
-const DashboardAnalytics = async () => {
+const DashboardAnalytics = () => {
 
   return (
     <Grid container spacing={6}>

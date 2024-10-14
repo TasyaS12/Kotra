@@ -28,6 +28,7 @@
     "apexcharts": "^3.54.0",
     "classnames": "2.5.1",
     "firebase": "^10.14.1",
+    "js-cookie": "^3.0.5",
     "jspdf": "^2.5.2",
     "keen-slider": "^6.8.6",
     "next": "14.2.5",
