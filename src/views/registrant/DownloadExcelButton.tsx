@@ -11,7 +11,7 @@ const DonwloadExcelButton = () => {
   const [loading, setLoading] = useState(false);
 
   // Function to convert status to meaningful text
-  const getStatusText = (status) => {
+  const getStatusText = (status: number) => {
     switch (status) {
       case 1:
         return 'Active';
@@ -54,7 +54,7 @@ const DonwloadExcelButton = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Employee Data Export</h1>
+      <h1>Data Export</h1>
 
       {/* Download Excel button */}
       <button

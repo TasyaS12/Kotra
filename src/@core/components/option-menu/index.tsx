@@ -1,8 +1,9 @@
 'use client'
 
+import type { ReactElement, ReactNode, SyntheticEvent } from 'react'
+
 // React Imports
 import { useRef, useState } from 'react'
-import type { ReactElement, ReactNode, SyntheticEvent } from 'react'
 
 // Next Imports
 import Link from 'next/link'
@@ -23,7 +24,7 @@ import Divider from '@mui/material/Divider'
 import classnames from 'classnames'
 
 // Type Imports
-import type { OptionsMenuType, OptionType, OptionMenuItemType } from './types'
+import type { OptionMenuItemType, OptionsMenuType, OptionType } from './types'
 
 // Hook Imports
 import { useSettings } from '@core/hooks/useSettings'
@@ -55,8 +56,7 @@ const OptionMenu = (props: OptionsMenuType) => {
   const [open, setOpen] = useState(false)
 
   // Refs
-  const buttonElement = document.createElement('Button');
-  const anchorRef = useRef<HTMLButtonElement>(buttonElement)
+  const anchorRef = useRef<HTMLButtonElement | null>(null);
 
   // Hooks
   const { settings } = useSettings()
@@ -66,7 +66,7 @@ const OptionMenu = (props: OptionsMenuType) => {
   }
 
   const handleClose = (event: Event | SyntheticEvent) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
+    if (anchorRef.current && !(anchorRef.current) || anchorRef.current?.contains(event.target as HTMLElement)) {
       return
     }
 

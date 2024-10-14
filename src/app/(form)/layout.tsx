@@ -1,9 +1,10 @@
 // Type Imports
+import Head from "next/head";
+
 import type { ChildrenType } from '@core/types'
 
 // Util Imports
-import { getMode, getSystemMode } from '@core/utils/serverHelpers'
-import Head from "next/head";
+
 const Layout = async ({ children }: ChildrenType) => {
   // Vars
 
@@ -24,7 +25,7 @@ const Layout = async ({ children }: ChildrenType) => {
         </header>
     <Head>
         <title>Company Data Form</title>
-        
+
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
           rel="stylesheet"

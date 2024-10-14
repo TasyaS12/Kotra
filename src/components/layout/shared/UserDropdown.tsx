@@ -1,8 +1,9 @@
 'use client'
 
+import type { MouseEvent } from 'react'
+
 // React Imports
 import { useRef, useState } from 'react'
-import type { MouseEvent } from 'react'
 
 // Next Imports
 import { useRouter } from 'next/navigation'
@@ -39,8 +40,7 @@ const UserDropdown = () => {
   const [open, setOpen] = useState(false)
 
   // Refs
-  const divElement = document.createElement('div');
-  const anchorRef = useRef<HTMLDivElement>(divElement);
+  const anchorRef = useRef<HTMLDivElement>(null);
 
   // Hooks
   const router = useRouter()

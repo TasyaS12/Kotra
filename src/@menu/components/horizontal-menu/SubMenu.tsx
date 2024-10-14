@@ -24,11 +24,7 @@ import {
   offset,
   flip,
   shift,
-  useHover,
-  useRole,
   useInteractions,
-  useClick,
-  safePolygon,
   useDismiss,
   useFloatingNodeId,
   FloatingNode,
@@ -190,8 +186,6 @@ const SubMenu: ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (props, r
 
   const { y, refs, floatingStyles, context } = useFloating({
     open,
-    nodeId,
-    onOpenChange: setOpen,
     placement: level > 0 ? (dir.current !== 'rtl' ? 'right-start' : 'left-start') : 'bottom-start',
     middleware: [
       offset({
@@ -223,25 +217,18 @@ const SubMenu: ForwardRefRenderFunction<HTMLLIElement, SubMenuProps> = (props, r
     }
   })
 
-  const hover = useHover(context, {
-    handleClose: safePolygon({
-      blockPointerEvents: true
-    }), // safePolygon function allows us to reach to submenu
-    restMs: 25, // Only opens submenu when cursor rests for 25ms on a menu
-    enabled: triggerPopout === 'hover', // Only enable hover effect when triggerPopout option is set to 'hover',
-    delay: { open: 75 } // Delay opening submenu by 75ms
-  })
 
-  const click = useClick(context, {
-    enabled: triggerPopout === 'click', // Only enable click effect when triggerPopout option is set to 'click'
-    toggle: false
-  })
+  // const click = useClick(context, {
+  //   enabled: triggerPopout === 'click', // Only enable click effect when triggerPopout option is set to 'click'
+  //   toggle: false
+  // })
 
   const dismiss = useDismiss(context)
-  const role = useRole(context, { role: 'menu' })
+
+  // const role = useRole(context, { role: 'menu' })
 
   // Merge all the interactions into prop getters
-  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([hover, click, dismiss, role])
+  const { getReferenceProps, getFloatingProps, getItemProps } = useInteractions([ dismiss])
 
   const handleOnClick = (event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
     onClick?.(event)

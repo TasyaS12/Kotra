@@ -1,9 +1,8 @@
 'use client'
-import { SetStateAction, useEffect, useState } from 'react';
-import { Roboto } from "next/font/google";
-import Head from "next/head";
+import type { SetStateAction} from 'react';
+import { useEffect, useState } from 'react';
+
 import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
@@ -32,16 +31,20 @@ export default function Page() {
   const handleNext = () => {
     setFormStep((prevStep) => {
       const newStep = prevStep + 1;
+
       setSelectedButton(newStep);
-      return newStep;
+
+return newStep;
     });
   };
 
   const handlePrev = () => {
     setFormStep((prevStep) => {
       const newStep = Math.max(prevStep - 1, 0);
+
       setSelectedButton(newStep);
-      return newStep;
+
+return newStep;
     });
   };
 
@@ -60,7 +63,7 @@ export default function Page() {
         <div className="bg-grey p-8 rounded-lg shadow-lg">
           <div className="flex justify-between mb-10">
             {['Company Data', 'Business Product', 'Date Meeting', 'Upload File'].map((text, index) => (
-              <button 
+              <button
                 key={index}
                 className={`flex-1 py-5 px-5 rounded-2xl text-white shadow-md ml-4 ${selectedButton === index ? 'bg-[#0B3A89]' : 'bg-[#E1E1E1]'}`}
                 onClick={() => handleButtonClick(index)}
@@ -77,7 +80,7 @@ export default function Page() {
                 </div>
               </button>
             ))}
-          </div> 
+          </div>
           <form>
             {formStep === 0 && (
               <div className="grid grid-cols-2 gap-4 p-8 rounded-2xl outline outline-2 outline-offset-2 outline-[#E8E8E8] shadow-xl bg-[#fffff]">

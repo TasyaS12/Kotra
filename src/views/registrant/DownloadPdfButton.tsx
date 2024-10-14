@@ -10,7 +10,7 @@ const DownloadPdfButton = () => {
   const [loading, setLoading] = useState(false);
 
   // Function to convert status to meaningful text
-  const getStatusText = (status) => {
+  const getStatusText = (status: number) => {
     switch (status) {
       case 1:
         return 'Active';
@@ -33,21 +33,21 @@ const DownloadPdfButton = () => {
       ['ID', 'Full Name', 'Post', 'Email', 'City', 'Start Date', 'Salary', 'Age', 'Experience', 'Status'],
     ];
 
-    // Populate the rows with your data
+    // Populate the rows with your data, ensuring all values are strings
     const rows = data.map(item => [
-      item.id,
+      item.id.toString(),
       item.fullName,
       item.post,
       item.email,
       item.city,
       item.start_date,
-      item.salary.toFixed(2),
-      item.age,
-      item.experience,
+      item.salary.toFixed(2), // Already a string
+      item.age.toString(),
+      item.experience.toString(),
       getStatusText(item.status),
     ]);
 
-    // Append headers and rows to the PDF
+    // Append headers and rows to the PDF, ensuring row is a string array
     headers.concat(rows).forEach((row, index) => {
       doc.text(row.join(' | '), 10, 20 + index * 10);
     });
@@ -59,7 +59,7 @@ const DownloadPdfButton = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Employee Data PDF Export</h1>
+      <h1>PDF Export</h1>
       <button
         onClick={downloadPDF}
         style={{

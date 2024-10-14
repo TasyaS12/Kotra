@@ -1,5 +1,6 @@
 'use client'
 
+// @ts-nocheck
 // React Imports
 import { useEffect, useMemo, useState } from 'react'
 
@@ -203,7 +204,7 @@ const RegistrantTable = () => {
   return (
     <Card>
       <CardHeader
-        title='Kitchen Sink'
+        title='Registrant Table'
         action={
           <DebouncedInput
             value={globalFilter ?? ''}

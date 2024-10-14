@@ -1,7 +1,7 @@
 'use client'
 
 // React Imports
-import { useRef, useState } from 'react'
+import { useState, useRef } from 'react'
 
 // MUI Imports
 import Tooltip from '@mui/material/Tooltip'
@@ -25,7 +25,7 @@ const ModeDropdown = () => {
   const [tooltipOpen, setTooltipOpen] = useState(false)
 
   // Refs
-  const anchorRef = useRef<HTMLButtonElement>(null)
+  const anchorRef = useRef<HTMLButtonElement>(null);
 
   // Hooks
   const { settings, updateSettings } = useSettings()
