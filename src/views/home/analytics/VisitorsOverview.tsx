@@ -38,7 +38,7 @@ const VisitorsOverview = () => {
               <CustomAvatar skin='light' color='info' variant='rounded' size={24}>
                 <i className='tabler-users text-lg' />
               </CustomAvatar>
-              <Typography>Followers</Typography>
+              <Typography>Visitors</Typography>
             </div>
             <Typography variant='h5'>45.3K</Typography>
             <Typography variant='body2' color='text.disabled'>
@@ -53,7 +53,7 @@ const VisitorsOverview = () => {
           <div className='flex items-end flex-col plb-2'>
             <div className='flex items-center mbe-2 gap-x-[6px]'>
               <Typography color='text.secondary' className='m'>
-                Likes
+                Registrant
               </Typography>
               <CustomAvatar skin='light' variant='rounded' color='primary' size={24}>
                 <i className='tabler-thumb-up text-lg' />

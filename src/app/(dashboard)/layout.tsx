@@ -1,7 +1,9 @@
 'use client'
 
 // MUI Imports
-import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+// import { useRouter } from 'next/navigation'
 
 import Button from '@mui/material/Button'
 
@@ -28,22 +30,45 @@ import { getMode, getSystemMode } from '@core/utils/serverHelpers'
 
 import { isLogin } from '@/utils/login'
 
-const Layout = async ({ children }: ChildrenType) => {
+const Layout = ({ children }: ChildrenType) => {
   // Vars
   const direction = 'ltr'
   const mode = getMode()
   const systemMode = getSystemMode()
+  const [isLoginData, setIsLogin] = useState<any>('loading')
 
-  const router = useRouter()
+  //const router = useRouter()
 
-  console.log(isLogin())
+  useEffect(() => {
+    // Function to fetch all data and set it in state
+    const isLogins = async () => {
+      try {
+        const dataLogin = await isLogin()
 
-  if(!isLogin()) {
-    router.push('/login')
+        setIsLogin(dataLogin)
 
-    return null
+        return dataLogin
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLogin(false)
 
-  }else{
+        return false
+      }
+    };
+
+    isLogins()
+  }, [])
+
+  if(isLoginData === "loading") {
+    return <div>Loading...</div>
+  }
+
+  // if (!isLoginData) {
+  //   router.push('/login')
+  //
+  //   return <div>Loading...</div>
+  //
+  // } else{
     return (
       <Providers direction={direction}>
         <LayoutWrapper
@@ -72,7 +97,8 @@ const Layout = async ({ children }: ChildrenType) => {
         </ScrollToTop>
       </Providers>
     )
-  }
+
+  // }
 }
 
 export default Layout

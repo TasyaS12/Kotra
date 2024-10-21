@@ -1,5 +1,5 @@
 // login.ts
-import { signOut, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { signOut, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { auth } from './firebase';
 
@@ -18,12 +18,21 @@ export const loginWithEmailPassword = async (email: string, password: string) =>
   }
 };
 
-export const isLogin = (): boolean => {
+export async function isLogin() {
   const user = auth.currentUser;
 
-  return !!user;
-};
+  if (user) {
+    // User is signed in
+    console.log("User is signed in:", user.email);
 
+    return true;
+  } else {
+    // No user is signed in
+    console.log("No user is signed in");
+
+    return false;
+  }
+}
 
 
 export const logout = async () => {

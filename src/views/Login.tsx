@@ -25,7 +25,6 @@ import type { SystemMode } from '@core/types'
 
 // Component Imports
 import Link from '@components/Link'
-import Logo from '@components/layout/shared/Logo'
 import CustomTextField from '@core/components/mui/TextField'
 
 // Config Imports
@@ -103,12 +102,19 @@ const LoginV2 = ({ mode }: { mode: SystemMode }) => {
         )}
       </div>
       <div className='flex justify-center items-center bs-full bg-backgroundPaper !min-is-full p-6 md:!min-is-[unset] md:p-12 md:is-[480px]'>
-        <Link className='absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]'>
-          <Logo />
+        <Link className="absolute block-start-5 sm:block-start-[33px] inline-start-6 sm:inline-start-[38px]">
+          <img
+            alt="Logo"
+            className="h-10"
+            height="100"
+            src="/kotralogo.svg"
+            width="150"
+          />
         </Link>
-        <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
-          <div className='flex flex-col gap-1'>
-            <Typography variant='h4'>{`Welcome to ${themeConfig.templateName}! 👋🏻`}</Typography>
+        <div
+          className="flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0">
+          <div className="flex flex-col gap-1">
+            <Typography variant="h4">{`Welcome to ${themeConfig.templateName}! 👋🏻`}</Typography>
             <Typography>Please sign-in to your account and start the adventure</Typography>
           </div>
           <form

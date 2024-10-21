@@ -1,9 +1,11 @@
 'use client'
 
 // React Imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // MUI Imports
+import { useRouter } from 'next/navigation'
+
 import Card from '@mui/material/Card'
 import CardHeader from '@mui/material/CardHeader'
 
@@ -12,49 +14,76 @@ import Button from '@mui/material/Button'
 // Third-party Imports
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 
-// Type Imports
-import type { DataType } from './data'
-
 // Style Imports
 import styles from '@core/styles/table.module.css'
 
 // Data Imports
-import defaultData from './data'
+import type { FormData } from '@views/registrant/data'
+import { getAllData } from '@/utils/getData'
 
 // Column Definitions
-const columnHelper = createColumnHelper<DataType>()
+const columnHelper = createColumnHelper<FormData>()
 
 const columns = [
   columnHelper.accessor('id', {
     cell: info => info.getValue(),
     header: 'ID'
   }),
-  columnHelper.accessor('fullName', {
+  columnHelper.accessor('companyName', {
     cell: info => info.getValue(),
-    header: 'Name'
+    header: 'Company Name'
   }),
   columnHelper.accessor('email', {
     cell: info => info.getValue(),
     header: 'Email'
   }),
-  columnHelper.accessor('start_date', {
+  columnHelper.accessor('yearOfEstablished', {
     cell: info => info.getValue(),
-    header: 'Date'
+    header: 'Year Established'
   }),
-  columnHelper.accessor('experience', {
+  columnHelper.accessor('selectedLocation', {
     cell: info => info.getValue(),
-    header: 'Experience'
+    header: 'Location'
   }),
-  columnHelper.accessor('age', {
+  columnHelper.accessor('importingCountries', {
     cell: info => info.getValue(),
-    header: 'Age'
-  })
+    header: 'Importing Countries'
+  }),
+  columnHelper.accessor('businessLine', {
+    cell: info => info.getValue(),
+    header: 'Business Line'
+  }),
+  columnHelper.accessor('annualSales', {
+    cell: info => info.getValue(),
+    header: 'Annual Sales'
+  }),
+  columnHelper.accessor('meetingDate', {
+    cell: info => info.getValue(),
+    header: 'Meeting Date'
+  }),
 ]
 
 const BasicDataTables = () => {
   // States
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [data, setData] = useState(() => [...defaultData])
+  const [data, setData] = useState<FormData[]>([]); // Initialize with an empty array
+
+  useEffect(() => {
+    // Function to fetch all data and set it in state
+    const fetchData = async () => {
+      try {
+        const allData = await getAllData(); // Fetch all documents
+
+        setData(allData); // Update state with fetched data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Call the fetch function when the component mounts
+  }, []); // Empty dependency array ensures this runs once after the component mounts
+
+
+  const router = useRouter()
 
   // Hooks
   const table = useReactTable({
@@ -72,32 +101,32 @@ const BasicDataTables = () => {
       <div className='overflow-x-auto'>
         <table className={styles.table}>
           <thead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                  <th key={header.id}>
-                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
+          {table.getHeaderGroups().map(headerGroup => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map(header => (
+                <th key={header.id}>
+                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+          </thead>
+          <tbody>
+          {table
+            .getRowModel()
+            .rows.slice(0, 6)
+            .map(row => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
                 ))}
               </tr>
             ))}
-          </thead>
-          <tbody>
-            {table
-              .getRowModel()
-              .rows.slice(0, 6)
-              .map(row => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map(cell => (
-                    <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-                  ))}
-                </tr>
-              ))}
           </tbody>
         </table>
         <div className="my-10 flex w-full justify-center">
-          <Button variant='contained' onClick={() => table.getAllLeafColumns()[1].toggleVisibility()}>
-            View All Registrant
+          <Button variant='contained' onClick={() => router.push('./registrant')}>
+            View All Registrants
           </Button>
         </div>
       </div>

@@ -12,6 +12,26 @@ export type DataType = {
   status: number
 }
 
+export type FormData = {
+  email?: string;
+  mobilePhone?: string;
+  companyName?: string;
+  companyEmail?: string;
+  personInCharge?: string;
+  website?: string;
+  position?: string;
+  yearOfEstablished?: number;
+  businessLine?: string;
+  importingCountries?: string;
+  productRange?: string;
+  experienceImporting?: string;
+  annualSales?: number;
+  importAmount?: number;
+  brandName?: string;
+  meetingDate?: string;
+  selectedLocation?: string;
+}
+
 const data: DataType[] = [
   {
     id: 1,
