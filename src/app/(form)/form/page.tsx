@@ -27,7 +27,7 @@ interface FormData {
   yearOfEstablished?: number;
   businessLine?: string;
   importingCountries?: string;
-  productRange?: string;
+  productsRange?: string;
   experienceImporting?: string;
   annualSales?: number;
   importAmount?: number;
@@ -493,7 +493,7 @@ return newStep;
                     Business Line <span className="text-red-500">*</span>
                   </label>
                   <div className="flex flex-col md:flex-row md:space-x-6 mt-2">
-                    {['Manufacture', 'Importer', 'Distributor', 'EPC', 'Service', 'Other'].map((line) => (
+                    {['Manufacturer', 'Importer', 'Distributor', 'EPC', 'Service', 'Other'].map((line) => (
                       <div key={line} className="flex items-center">
                         <input
                           type="radio"
@@ -576,11 +576,11 @@ return newStep;
                   />
                 </div>
 
-                {/* Average Annual Sales Field */}
+                {/* Annual Sales Field */}
                 <div>
                   <label className="block text-gray-700 font-semibold">
-                    AVERAGE ANNUAL SALES In USD MILLION
-                    (FOR LAST 3 YEARS)
+                    ANNUAL SALES In USD MILLION
+                    (2023)
                   </label>
                   <input
                     className="w-full mt-2 p-4 border rounded-md"
@@ -639,7 +639,7 @@ return newStep;
 
                 <div className="">
                   <label className="block text-gray-700 font-semibold">
-                    Do you have any questions regarding the EV Ecosystem or Automotive Industry in Indonesia?
+                    Do you have any questions or inquiries regarding the Korean EV ecosystem or the automotive sector?
                   </label>
                   <input
                     className="w-full mt-2 p-4 border rounded-md"
